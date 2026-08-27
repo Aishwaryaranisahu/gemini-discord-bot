@@ -121,7 +121,7 @@ async def helpbot(ctx):
     """Show the bot's available commands."""
 
     await ctx.send(
-        "**ChatGPT Discord Bot**\n"
+        "**Gemini Discord Bot**\n"
         "`!ask <question>` - Ask a question\n"
         "`!summarize <text>` - Summarize text\n"
         "`!helpbot` - Show available commands"
