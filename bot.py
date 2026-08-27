@@ -8,7 +8,7 @@ from bot_logic import (
     build_qa_prompt,
     build_summary_prompt,
 )
-from openai_service import OpenAIService
+from gemini_service import GeminiService
 
 
 # Load environment variables from .env
@@ -40,7 +40,7 @@ bot = commands.Bot(
 
 
 # Create AI service
-ai = OpenAIService(
+ai = GeminiService(
     GEMINI_API_KEY,
     GEMINI_MODEL
 )
