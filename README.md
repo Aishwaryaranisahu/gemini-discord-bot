@@ -1,157 +1,178 @@
-# ChatGPT Discord Bot
+# 🤖 Discord AI Assistant
 
-A Python-based Discord chatbot integrating the Discord API with the OpenAI API.
+A Python-based Discord bot that uses Google's Gemini API to provide AI-powered responses directly inside Discord.
 
-## Features
+## ✨ Features
 
-The bot provides three user-facing commands:
+- 💬 AI-powered conversational responses
+- 🧠 Google Gemini API integration
+- 🔐 Secure API-key management using environment variables
+- ⚡ Simple Discord command interface
+- 🧩 Modular Python project structure
+- 🛡️ Exception handling for runtime errors
+- 🧪 Automated tests using pytest
 
-| Command | Purpose |
-|---|---|
-| `!ask <question>` | Sends a question to the OpenAI API and returns the response |
-| `!summarize <text>` | Requests a concise summary of supplied text |
-| `!helpbot` | Displays available commands and usage examples |
+## 🛠️ Tech Stack
 
-## Technical highlights
+- 🐍 Python
+- 💬 Discord.py
+- ✨ Google Gemini API
+- 🔑 python-dotenv
+- 🧪 pytest
 
-- Python
-- `discord.py` for the Discord bot command framework
-- OpenAI Python SDK and Responses API
-- Environment-based credential handling with `python-dotenv`
-- Exception handling for API and command failures
-- Input validation before API calls
-- Offline unit tests using `pytest`
-
-## Architecture
+## 📁 Project Structure
 
 ```text
-Discord User
-     |
-     v
-discord.py command
-     |
-     +--> input validation
-     |
-     +--> prompt builder
-     |
-     v
-OpenAIService
-     |
-     v
-OpenAI Responses API
-     |
-     v
-Discord response
+chagpt-discord-bot/
+│
+├── bot.py
+├── bot_logic.py
+├── gemini_service.py
+├── requirements.txt
+├── README.md
+├── .gitignore
+└── tests/
+    └── test_bot_logic.py
 ```
 
-## Testing
+## 🔄 How It Works
 
-The project includes three offline test cases in `tests/test_bot_logic.py`.
+```text
+👤 Discord User
+       ↓
+💬 Discord Command
+       ↓
+🐍 Python Bot
+       ↓
+🧩 Bot Logic
+       ↓
+✨ Gemini Service
+       ↓
+🧠 Google Gemini API
+       ↓
+💬 Generated Response
+       ↓
+👤 Discord User
+```
 
-1. **Valid Q&A input** — verifies that a normal question is accepted and converted into a prompt.
-2. **Summarization input** — verifies that supplied text is accepted and placed into the summarization prompt.
-3. **Invalid/empty input** — verifies that blank input is rejected before an API call.
+The bot receives a command from Discord, processes the input using the bot logic, sends the request to Google's Gemini API, and returns the generated response to Discord.
 
-Run:
+## 💻 Available Commands
+
+### 🤖 Ask
+
+Ask the AI a question:
+
+```text
+!ask What is machine learning?
+```
+
+### 📝 Summarize
+
+Summarize provided text:
+
+```text
+!summarize Artificial intelligence enables computers to perform tasks that normally require human intelligence.
+```
+
+### ℹ️ Help
+
+Display available bot commands:
+
+```text
+!helpbot
+```
+
+## 🔐 Environment Variables
+
+Create a `.env` file in the project directory:
+
+```env
+DISCORD_TOKEN=your_discord_bot_token
+GEMINI_API_KEY=your_gemini_api_key
+```
+
+⚠️ **Never upload your `.env` file or expose your API keys publicly.**
+
+The `.env` file is excluded from version control using `.gitignore`.
+
+## 📦 Installation
+
+### 1. Clone the repository
 
 ```bash
-pytest -q
+git clone https://github.com/Aishwaryaranisahu/chagpt-discord-bot.git
+cd chagpt-discord-bot
 ```
 
-The tests do **not** call Discord or OpenAI, so they can run without API credentials.
-
-## Local setup
-
-### 1. Create a virtual environment
+### 2. Create a virtual environment
 
 ```bash
 python -m venv .venv
 ```
 
-Windows:
+### 3. Activate the virtual environment
 
-```bash
-.venv\Scripts\activate
+**Windows PowerShell:**
+
+```powershell
+.venv\Scripts\Activate.ps1
 ```
 
-macOS/Linux:
+**macOS/Linux:**
 
 ```bash
 source .venv/bin/activate
 ```
 
-### 2. Install dependencies
+### 4. Install dependencies
 
 ```bash
 pip install -r requirements.txt
 ```
 
-### 3. Configure environment variables
+### 5. Configure environment variables
 
-Copy `.env.example` to `.env` and add your own credentials:
+Create a `.env` file and add:
 
-```text
-DISCORD_TOKEN=...
-OPENAI_API_KEY=...
-OPENAI_MODEL=gpt-5
+```env
+DISCORD_TOKEN=your_discord_bot_token
+GEMINI_API_KEY=your_gemini_api_key
 ```
 
-Never commit `.env` or real API keys.
-
-### 4. Configure the Discord bot
-
-Create a Discord application/bot in the Discord Developer Portal.
-
-Enable the **Message Content Intent** for the bot and enable the same intent in the code. The `discord.py` commands extension requires this intent for prefix commands.
-
-Invite the bot to a test server with the permissions required to read and send messages.
-
-### 5. Run the bot
+### 6. Run the bot
 
 ```bash
 python bot.py
 ```
 
-Then test in Discord:
+## 🧪 Testing
 
-```text
-!helpbot
-!ask explain recursion in simple terms
-!summarize Python is a general-purpose programming language...
+The project includes tests for the core bot logic using pytest.
+
+Run the tests with:
+
+```bash
+pytest
 ```
 
-## Security
+## 🔒 Security
 
-- Secrets are read from environment variables.
-- `.env` is excluded through `.gitignore`.
-- `.env.example` contains placeholders only.
-- The repository should never contain real Discord tokens or OpenAI API keys.
+- 🔑 API credentials are stored in environment variables.
+- 🚫 `.env` is excluded from Git.
+- 🚫 API keys are not hard-coded in the source code.
+- 🚫 Virtual environments and cache files should not be committed.
 
-## Project structure
+## 📌 Project Highlights
 
-```text
-chatgpt-discord-bot/
-├── bot.py
-├── bot_logic.py
-├── openai_service.py
-├── tests/
-│   └── test_bot_logic.py
-├── .env.example
-├── .gitignore
-├── requirements.txt
-└── README.md
-```
+- 🔌 Integrated a generative AI service with a Discord bot.
+- 🧩 Separated bot commands, application logic, and AI-service functionality into modules.
+- 🛡️ Added exception handling for API/runtime failures.
+- 🔐 Used environment variables for sensitive credentials.
+- 🧪 Added automated tests for core logic.
 
-## Resume alignment
+## 👩‍💻 Author
 
-This repository supports the following resume claims:
+**Aishwarya Rani Sahu**
 
-- Developed a Discord chatbot integrating the OpenAI API.
-- Implemented three user-facing commands for Q&A, summarization, and help.
-- Implemented environment-based credential handling.
-- Added exception management and input validation.
-- Validated prompt and command logic through a three-case offline testing workflow.
-
-## Notes
-
-This project is intended as a portfolio/learning project. Do not use it as a medical, financial, or other high-stakes decision system.
+GitHub: https://github.com/Aishwaryaranisahu
